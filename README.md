@@ -9,4 +9,3 @@ Projektvorgaben:
     Nachdem der stellvertretende Schulleiter den Antrag abgezeichnet hat, erscheint er beim Schulleiter in einer Liste. Der Schulleiter genehmigt den Antrag. (Log Eintrag erstellen) 
     Der Antragsteller kann den Stand der Bearbeitung immer sehen.
 
-Der Antragsteller kann den Stand der Bearbeitung immer sehen, d.h. ob der Antrag abgezeichnet vom AL ist, abgezeichnet von stellv. Schulleiter oder genehmigt vom Schulleiter.
