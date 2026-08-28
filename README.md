@@ -1,3 +1,5 @@
+Die Gruppe besteht aus folgenden Teilnehmern: Lars Schwerdt, Michael Linn, Paul Wambsganß
+
 Projektvorgaben: 
 
     Lehrer stellt einen Antrag. Hierzu loggt er sich beim System ein und kann den Anlass auswählen (Punkt 1 auf dem Formular)
