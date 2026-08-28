@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Mockup - Unterrichtsorganisation</title>
+<style>
+:root{
+--primary:#1d4e89;
+--primary-light:#e8f0fa;
+--accent:#ff9f1c;
+--gray-bg:#f4f6f9;
+--border:#c9d3de;
+--text:#243447;
+--green:#2e8b57;
+--amber:#e0a800;
+}
+*{box-sizing:border-box;}
+body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:var(--gray-bg);color:var(--text);}
+.topbar{background:var(--primary);color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;}
+.topbar h1{font-size:17px;margin:0;font-weight:600;}
+.userbox{font-size:13px;opacity:.9;}
+.nav{display:flex;gap:8px;background:#16406b;padding:0 24px;}
+.nav button{background:none;border:none;color:#dce8f7;padding:12px 16px;cursor:pointer;font-size:14px;border-bottom:3px solid transparent;}
+.nav button.active{color:#fff;border-bottom:3px solid var(--accent);font-weight:600;}
+.wrap{max-width:820px;margin:24px auto;padding:0 16px 50px;}
+.screen{display:none;}
+.screen.active{display:block;}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:18px;}
+.card h2{margin-top:0;font-size:16px;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:8px;}
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px;}
+input[type=text],input[type=date],select{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:5px;font-size:14px;background:#fbfcfe;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.radio-list label{font-weight:400;display:flex;align-items:center;gap:8px;margin:6px 0;padding:8px 10px;border:1px solid var(--border);border-radius:5px;cursor:pointer;background:#fbfcfe;}
+.radio-list label:hover{background:var(--primary-light);}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;padding:9px 18px;border-radius:5px;font-size:14px;cursor:pointer;margin-top:14px;margin-right:8px;}
+.btn.secondary{background:#e2e8f0;color:var(--text);}
+.btn.accent{background:var(--accent);}
+.btn.green{background:var(--green);}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;}
+th{background:var(--primary-light);color:var(--primary);}
+.badge{padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;color:#fff;}
+.badge.offen{background:#8a94a3;}
+.badge.al{background:var(--amber);color:#3a2b00;}
+.badge.genehmigt{background:var(--green);}
+.progress{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap;}
+.step{flex:1;min-width:100px;text-align:center;padding:8px 4px;border-radius:6px;background:#e9edf2;font-size:12px;font-weight:600;color:#7a8494;}
+.step.done{background:var(--green);color:#fff;}
+.step.current{background:var(--amber);color:#3a2b00;}
+.hint{font-size:12px;color:#6b7688;margin-top:4px;}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,30,45,.55);align-items:center;justify-content:center;z-index:50;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border-radius:8px;padding:24px 28px;max-width:380px;text-align:center;}
+.modal-box h3{margin-top:0;color:var(--primary);}
+.formular-anlass{display:none;border-top:1px dashed var(--border);margin-top:12px;padding-top:8px;}
+.formular-anlass.show{display:block;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<h1>Unterrichtsorganisation – Antragssystem (Mockup)</h1>
+<div class="userbox" id="userbox">Nicht angemeldet</div>
+</div>
+
+<div class="nav" id="navbar" style="display:none;">
+<button onclick="showScreen('dashboard')" id="nav-dashboard">Übersicht</button>
+<button onclick="showScreen('neuerAntrag')" id="nav-neuerAntrag">Neuer Antrag</button>
+<button onclick="showScreen('bearbeitung')" id="nav-bearbeitung">Zu bearbeiten</button>
+<button onclick="showScreen('status')" id="nav-status">Antragsverlauf</button>
+</div>
+
+<div class="wrap">
+
+<div class="screen active" id="screen-login">
+<div class="card" style="max-width:340px;margin:50px auto;">
+<h2>Anmeldung</h2>
+<label>Benutzername</label>
+<input type="text" id="loginUser" value="mueller">
+<label>Rolle (nur zur Demo wählbar)</label>
+<select id="loginRole">
+<option value="LK">Lehrkraft / Antragsteller</option>
+<option value="AL">Abteilungsleiter</option>
+<option value="SL">Schulleiter</option>
+</select>
+<button class="btn" onclick="login()">Anmelden</button>
+</div>
+</div>
+
+<div class="screen" id="screen-dashboard">
+<div class="card">
+<h2>Meine Übersicht</h2>
+<p id="dashGreeting"></p>
+<button class="btn" onclick="showScreen('neuerAntrag')">+ Neuen Antrag stellen</button>
+<button class="btn secondary" onclick="showScreen('bearbeitung')">Anträge zur Bearbeitung</button>
+<button class="btn secondary" onclick="showScreen('status')">Antragsverlauf ansehen</button>
+</div>
+</div>
+
+<div class="screen" id="screen-neuerAntrag">
+<div class="card">
+<h2>Neuer Antrag</h2>
+<div class="grid2">
+<div><label>Name</label><input type="text" value="Müller, Anna"></div>
+<div><label>Datum</label><input type="date" value="2026-08-28"></div>
+</div>
+
+<label>Anlass wählen</label>
+<div class="radio-list">
+<label><input type="radio" name="anlass" onclick="showAnlass('vertretung')"> Unterrichtsvertretung aus dienstlichen Gründen</label>
+<label><input type="radio" name="anlass" onclick="showAnlass('tausch')"> Unterrichtstausch</label>
+<label><input type="radio" name="anlass" onclick="showAnlass('klasseAbwesend')"> Klasse abwesend ohne Lehrkraft</label>
+</div>
+
+<div class="formular-anlass" id="anlass-vertretung">
+<label>Grund</label>
+<input type="text" placeholder="z.B. Fortbildung, dienstliche Verpflichtung">
+<div class="grid2">
+<div><label>Beginn</label><input type="date"></div>
+<div><label>Ende</label><input type="date"></div>
+</div>
+<label>Vertretungsmaterial</label>
+<select><option>auf Lernplattform</option><option>per Mail</option></select>
+</div>
+
+<div class="formular-anlass" id="anlass-tausch">
+<label>Ursprünglicher Termin</label>
+<div class="grid2">
+<div><input type="date"></div>
+<div><input type="text" placeholder="Stunde / Raum"></div>
+</div>
+<label>Tausch mit (Kollege/in, neuer Termin)</label>
+<input type="text" placeholder="z.B. Weber, am 05.09. 3. Std">
+</div>
+
+<div class="formular-anlass" id="anlass-klasseAbwesend">
+<div class="grid2">
+<div><label>Klasse</label><input type="text"></div>
+<div><label>Grund</label><input type="text" placeholder="z.B. Prüfung, ÜLU"></div>
+</div>
+<div class="grid2">
+<div><label>Beginn</label><input type="date"></div>
+<div><label>Ende</label><input type="date"></div>
+</div>
+</div>
+
+<br>
+<button class="btn accent" onclick="submitAntrag()">Antrag absenden</button>
+<button class="btn secondary" onclick="showScreen('dashboard')">Abbrechen</button>
+</div>
+</div>
+
+<div class="screen" id="screen-bearbeitung">
+<div class="card">
+<h2>Anträge zur Bearbeitung</h2>
+<table>
+<tr><th>Antragsteller</th><th>Anlass</th><th>Status</th><th>Aktion</th></tr>
+<tr>
+<td>Müller, Anna</td>
+<td>Unterrichtsvertretung</td>
+<td><span class="badge offen">Offen</span></td>
+<td><button class="btn" style="margin:0;padding:6px 12px;" onclick="openConfirmModal()">Abzeichnen</button></td>
+</tr>
+<tr>
+<td>Schmidt, Ben</td>
+<td>Unterrichtstausch</td>
+<td><span class="badge al">Von AL abgezeichnet</span></td>
+<td><button class="btn secondary" style="margin:0;padding:6px 12px;">Details</button></td>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="screen" id="screen-status">
+<div class="card">
+<h2>Antragsverlauf</h2>
+<p class="hint">Antrag Nr. 2026-0142 – Unterrichtsvertretung</p>
+<div class="progress">
+<div class="step done">Gestellt</div>
+<div class="step done">AL</div>
+<div class="step current">StSL</div>
+<div class="step">SL</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="modal-overlay" id="confirmModal">
+<div class="modal-box">
+<h3>Antrag abzeichnen</h3>
+<div id="modalStep1">
+<p>Antrag freigeben?</p>
+<button class="btn green" onclick="confirmStep2()">Ja</button>
+<button class="btn secondary" onclick="closeModal()">Abbrechen</button>
+</div>
+<div id="modalStep2" style="display:none;">
+<p><strong>Bitte erneut bestätigen:</strong></p>
+<button class="btn green" onclick="finalizeApproval()">Endgültig bestätigen</button>
+<button class="btn secondary" onclick="closeModal()">Abbrechen</button>
+</div>
+</div>
+</div>
+
+<script>
+function login(){
+  const role = document.getElementById('loginRole').value;
+  const names = {LK:'Lehrkraft', AL:'Abteilungsleiter', SL:'Schulleiter'};
+  document.getElementById('userbox').innerText = document.getElementById('loginUser').value + ' — ' + names[role];
+  document.getElementById('navbar').style.display='flex';
+  document.getElementById('dashGreeting').innerText = 'Angemeldet als ' + names[role] + '.';
+  showScreen('dashboard');
+}
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById('nav-'+name);
+  if(btn) btn.classList.add('active');
+}
+
+function showAnlass(id){
+  document.querySelectorAll('.formular-anlass').forEach(f=>f.classList.remove('show'));
+  document.getElementById('anlass-'+id).classList.add('show');
+}
+
+function submitAntrag(){
+  alert('Antrag abgesendet. Log-Eintrag erzeugt.');
+  showScreen('dashboard');
+}
+
+function openConfirmModal(){
+  document.getElementById('confirmModal').classList.add('active');
+  document.getElementById('modalStep1').style.display='block';
+  document.getElementById('modalStep2').style.display='none';
+}
+
+function confirmStep2(){
+  document.getElementById('modalStep1').style.display='none';
+  document.getElementById('modalStep2').style.display='block';
+}
+
+function finalizeApproval(){
+  alert('Antrag abgezeichnet.');
+  closeModal();
+}
+
+function closeModal(){
+  document.getElementById('confirmModal').classList.remove('active');
+}
+</script>
+
+</body>
+</html>
