@@ -1,0 +1,62 @@
+:root{
+  --primary:#1d4e89;
+  --primary-light:#e8f0fa;
+  --accent:#ff9f1c;
+  --gray-bg:#f4f6f9;
+  --border:#c9d3de;
+  --text:#243447;
+  --green:#2e8b57;
+  --amber:#e0a800;
+  --red:#c0392b;
+}
+*{box-sizing:border-box;}
+body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:var(--gray-bg);color:var(--text);}
+.topbar{background:var(--primary);color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;}
+.topbar h1{font-size:17px;margin:0;font-weight:600;}
+.userbox{font-size:13px;opacity:.95;display:flex;align-items:center;gap:14px;}
+.userbox a{color:#fff;text-decoration:underline;}
+.nav{display:flex;gap:8px;background:#16406b;padding:0 24px;flex-wrap:wrap;}
+.nav a{background:none;border:none;color:#dce8f7;padding:12px 16px;cursor:pointer;font-size:14px;border-bottom:3px solid transparent;text-decoration:none;}
+.nav a.active{color:#fff;border-bottom:3px solid var(--accent);font-weight:600;}
+.wrap{max-width:860px;margin:24px auto;padding:0 16px 50px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:18px;}
+.card h2{margin-top:0;font-size:16px;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:8px;}
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px;}
+input[type=text],input[type=date],input[type=password],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:5px;font-size:14px;background:#fbfcfe;font-family:inherit;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.radio-list label{font-weight:400;display:flex;align-items:center;gap:8px;margin:6px 0;padding:8px 10px;border:1px solid var(--border);border-radius:5px;cursor:pointer;background:#fbfcfe;}
+.radio-list label:hover{background:var(--primary-light);}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;padding:9px 18px;border-radius:5px;font-size:14px;cursor:pointer;margin-top:14px;margin-right:8px;text-decoration:none;}
+.btn.secondary{background:#e2e8f0;color:var(--text);}
+.btn.accent{background:var(--accent);color:#3a2b00;}
+.btn.green{background:var(--green);}
+.btn.red{background:var(--red);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--primary-light);color:var(--primary);}
+.badge{padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;color:#fff;display:inline-block;white-space:nowrap;}
+.badge.gestellt{background:#8a94a3;}
+.badge.al_abgezeichnet{background:var(--amber);color:#3a2b00;}
+.badge.stsl_abgezeichnet{background:#3d7bbf;}
+.badge.genehmigt{background:var(--green);}
+.badge.abgelehnt{background:var(--red);}
+.progress{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap;}
+.step{flex:1;min-width:90px;text-align:center;padding:8px 4px;border-radius:6px;background:#e9edf2;font-size:12px;font-weight:600;color:#7a8494;}
+.step.done{background:var(--green);color:#fff;}
+.step.current{background:var(--amber);color:#3a2b00;}
+.hint{font-size:12px;color:#6b7688;margin-top:4px;}
+.formular-anlass{display:none;border-top:1px dashed var(--border);margin-top:12px;padding-top:8px;}
+.formular-anlass.show{display:block;}
+.msg{padding:10px 14px;border-radius:6px;margin-bottom:14px;font-size:14px;}
+.msg.ok{background:#e6f4ec;border:1px solid var(--green);color:#1e5c39;}
+.msg.err{background:#fdecea;border:1px solid var(--red);color:#8a2418;}
+dl.detail{display:grid;grid-template-columns:180px 1fr;gap:4px 12px;font-size:14px;margin:8px 0;}
+dl.detail dt{font-weight:600;color:#556;}
+dl.detail dd{margin:0;}
+.logtable td{font-size:13px;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(20,30,45,.55);align-items:center;justify-content:center;z-index:50;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border-radius:8px;padding:24px 28px;max-width:420px;text-align:center;}
+.modal-box h3{margin-top:0;color:var(--primary);}
+footer.pageinfo{text-align:center;font-size:11px;color:#9aa4b2;margin-top:8px;}

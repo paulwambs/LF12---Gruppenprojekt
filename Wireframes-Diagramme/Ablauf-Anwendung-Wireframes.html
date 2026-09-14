@@ -1,0 +1,655 @@
+<title>Antragsprogramm Blueprints</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Kalam:wght@400;700&display=swap">
+<style>
+  :root{
+    --ink:#1b2430;
+    --ink-soft:#5b6675;
+    --paper:#eef1f6;
+    --paper-2:#ffffff;
+    --paper-3:#f7f8fb;
+    --hairline:#d7dde6;
+    --brand:#1d4e89;
+    --brand-ink:#0e2c52;
+    --flame:#ff9f1c;
+    --flame-ink:#5a3600;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e7ecf3;
+      --ink-soft:#9aa7b8;
+      --paper:#0f1620;
+      --paper-2:#161f2c;
+      --paper-3:#1b2532;
+      --hairline:#2a3646;
+      --brand:#6ea8e8;
+      --brand-ink:#dce8f7;
+      --flame:#ffb454;
+      --flame-ink:#3a2400;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#e7ecf3;
+    --ink-soft:#9aa7b8;
+    --paper:#0f1620;
+    --paper-2:#161f2c;
+    --paper-3:#1b2532;
+    --hairline:#2a3646;
+    --brand:#6ea8e8;
+    --brand-ink:#dce8f7;
+    --flame:#ffb454;
+    --flame-ink:#3a2400;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    padding-inline:24px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;}
+
+  .top{padding-block:40px 8px;}
+  .top .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:10px;}
+  .top h1{font-size:clamp(28px,4vw,40px);margin:0 0 10px;letter-spacing:-0.01em;text-wrap:balance;}
+  .top p.lede{color:var(--ink-soft);font-size:16px;max-width:640px;margin:0 0 28px;line-height:1.6;}
+
+  .nav{position:sticky;top:0;z-index:10;background:var(--paper-2);border-block:1px solid var(--hairline);display:flex;gap:22px;overflow-x:auto;padding-inline:2px;margin-inline:-24px;padding-left:26px;padding-right:26px;}
+  .nav a{padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;}
+  .nav a:hover{color:var(--ink);}
+
+  section{padding-block:52px;border-bottom:1px solid var(--hairline);}
+  section:last-of-type{border-bottom:none;padding-bottom:64px;}
+
+  .eyebrow-row{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .eyebrow-row .num{background:var(--flame);color:var(--flame-ink);padding:2px 9px;border-radius:3px;font-weight:600;}
+  h2{font-size:clamp(22px,3vw,28px);margin:0 0 10px;text-wrap:balance;}
+  .section-desc{color:var(--ink-soft);max-width:660px;margin:0 0 30px;font-size:15px;line-height:1.65;}
+
+  .sheet{background:var(--paper-2);border:1px solid var(--hairline);border-radius:10px;overflow:hidden;margin-bottom:26px;}
+  .sheet-cap{display:flex;align-items:baseline;gap:10px;padding:12px 18px;border-bottom:1px solid var(--hairline);background:var(--paper-3);flex-wrap:wrap;}
+  .sheet-cap .name{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brand);font-weight:600;}
+  .sheet-cap .desc{font-size:13px;color:var(--ink-soft);}
+
+  .frame-outer{width:100%;overflow:hidden;background:#e4e8ee;}
+  .frame-inner{transform-origin:top left;}
+
+  .grid2col{display:grid;grid-template-columns:1fr;gap:0;}
+  @media(min-width:860px){ .grid2col.two{grid-template-columns:1fr;} }
+
+  footer{padding-block:34px 50px;color:var(--ink-soft);font-size:12px;font-family:'IBM Plex Mono',monospace;}
+
+  /* ---- gemeinsame Stile fuer eingebettete Diagramme (.mock) ---- */
+  .mock{font-family:'Segoe UI',Arial,sans-serif;color:#243447;}
+  .mock .uc{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:600;padding:6px;box-sizing:border-box;color:#243447;}
+  .mock .actorlbl{position:absolute;text-align:center;font-size:12px;font-weight:700;color:#243447;}
+  .mock .box{position:absolute;border-radius:6px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px 10px;}
+  .mock .tag{position:absolute;top:-11px;left:12px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff;}
+  .mock .title{font-size:14px;font-weight:700;color:#243447;line-height:1.25;}
+  .mock .sub{font-size:11px;color:#556;margin-top:3px;line-height:1.3;}
+
+  /* ---- gemeinsame Stile fuer die Low-Fi-Wireframes (.wf) ---- */
+  .wf{font-family:system-ui,sans-serif;color:#2b2b2b;}
+  .wf .hand{font-family:'Kalam',cursive;}
+  .wf a{color:#2b2b2b;}
+  .wf .fld{border:2px solid #9a9a9a;border-radius:3px;padding:8px 10px;font-size:14px;color:#8a8a8a;background:#fff;}
+  .wf .lbl{font-size:12px;font-weight:600;margin:12px 0 5px;color:#2b2b2b;}
+  .wf .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+  .wf .btn{display:inline-block;border:2px solid #2b2b2b;border-radius:3px;padding:8px 16px;font-size:14px;margin-top:12px;margin-right:8px;}
+  .wf table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;}
+  .wf th,.wf td{border:1px solid #9a9a9a;padding:8px 10px;text-align:left;vertical-align:top;}
+  .wf th{background:#eee;font-family:'Kalam',cursive;font-weight:700;font-size:14px;}
+  .wf .pill{border:2px solid #2b2b2b;border-radius:12px;padding:3px 10px;font-size:12px;display:inline-block;white-space:nowrap;}
+  .wf .sbtn{border:2px solid #2b2b2b;border-radius:3px;padding:5px 10px;font-size:12px;margin-right:5px;display:inline-block;}
+  .wf dl.detail{display:grid;grid-template-columns:180px 1fr;gap:5px 12px;font-size:14px;margin:8px 0;}
+  .wf dl.detail dt{font-weight:600;color:#555;}
+  .wf dl.detail dd{margin:0;}
+  .wf .card{border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;margin-bottom:16px;}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="eyebrow">Antragsprogramm &middot; Unterrichtsorganisation</div>
+    <h1>Ablauf, Anwendungsf&auml;lle &amp; Wireframes</h1>
+    <p class="lede">Drei Sichten auf den Genehmigungs-Workflow (Lehrkraft &rarr; Abteilungsleiter &rarr; Stellv. Schulleiter &rarr; Schulleiter): der Prozess als Ablaufdiagramm, die Systemfunktionen als Anwendungsdiagramm und ein Low-Fi-Prototyp der sechs zentralen Bildschirme.</p>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="#ablauf">01 Ablaufdiagramm</a>
+  <a href="#anwendung">02 Anwendungsdiagramm</a>
+  <a href="#wireframes">03 Wireframes</a>
+</div>
+
+<div class="wrap">
+
+  <section id="ablauf">
+    <div class="eyebrow-row"><span class="num">01</span> Prozess</div>
+    <h2>Ablaufdiagramm</h2>
+    <p class="section-desc">Der komplette Genehmigungsprozess von der Antragstellung bis zur Genehmigung durch den Schulleiter &ndash; inklusive der doppelten Best&auml;tigung bei jeder Abzeichnung und des Ablehnen-Zweigs, der auf jeder Stufe m&ouml;glich ist.</p>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">Prozess</span><span class="desc">Anmeldung &rarr; Anlass w&auml;hlen &rarr; Formular &rarr; AL &rarr; StSL &rarr; SL &rarr; genehmigt</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner mock" data-w="1000" data-h="1560" style="position:relative;width:1000px;height:1560px;background:#f4f6f9;">
+
+          <div style="position:absolute;top:14px;left:0;width:1000px;text-align:center;font-size:24px;font-weight:800;color:#1d4e89;">Ablaufdiagramm &ndash; Genehmigungsprozess</div>
+          <div style="position:absolute;top:46px;left:0;width:1000px;text-align:center;font-size:12px;color:#6b7688;">Antragsprogramm Unterrichtsorganisation</div>
+
+          <svg width="1000" height="1560" style="position:absolute;top:0;left:0;z-index:1;">
+            <defs>
+              <marker id="arrMain" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#243447"/>
+              </marker>
+              <marker id="arrRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/>
+              </marker>
+              <marker id="arrGray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#8a94a3"/>
+              </marker>
+            </defs>
+
+            <line x1="500" y1="140" x2="500" y2="180" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="250" x2="500" y2="290" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="360" x2="500" y2="400" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="470" x2="500" y2="510" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="580" x2="500" y2="620" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="700" x2="500" y2="740" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="810" x2="500" y2="850" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="920" x2="500" y2="960" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="1040" x2="500" y2="1080" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="1150" x2="500" y2="1190" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="1260" x2="500" y2="1300" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+            <line x1="500" y1="1380" x2="500" y2="1420" stroke="#243447" stroke-width="2" marker-end="url(#arrMain)"/>
+
+            <path d="M650,435 L720,458" stroke="#8a94a3" stroke-width="2" stroke-dasharray="3,4" fill="none" marker-end="url(#arrGray)"/>
+
+            <path d="M650,545 Q700,650 720,858" stroke="#c0392b" stroke-width="2" stroke-dasharray="6,5" fill="none" marker-end="url(#arrRed)"/>
+            <path d="M650,885 Q690,890 720,898" stroke="#c0392b" stroke-width="2" stroke-dasharray="6,5" fill="none" marker-end="url(#arrRed)"/>
+            <path d="M650,1225 Q700,1120 720,948" stroke="#c0392b" stroke-width="2" stroke-dasharray="6,5" fill="none" marker-end="url(#arrRed)"/>
+
+            <text x="660" y="700" font-size="11" font-style="italic" fill="#c0392b">ablehnen</text>
+            <text x="655" y="878" font-size="11" font-style="italic" fill="#c0392b">ablehnen</text>
+            <text x="660" y="1095" font-size="11" font-style="italic" fill="#c0392b">ablehnen</text>
+          </svg>
+
+          <div class="box" style="z-index:2;left:350px;top:80px;width:300px;height:60px;background:#dbeafe;border:2px solid #2563eb;">
+            <span class="tag" style="border:1px solid #2563eb;color:#1d4ed8;">LK</span>
+            <div class="title">Anmeldung</div>
+            <div class="sub">Lehrkraft meldet sich an</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:180px;width:300px;height:70px;background:#dbeafe;border:2px solid #2563eb;">
+            <span class="tag" style="border:1px solid #2563eb;color:#1d4ed8;">LK</span>
+            <div class="title">Anlass w&auml;hlen (Punkt 1)</div>
+            <div class="sub">Vertretung &middot; Tausch &middot; Klasse abwesend</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:290px;width:300px;height:70px;background:#dbeafe;border:2px solid #2563eb;">
+            <span class="tag" style="border:1px solid #2563eb;color:#1d4ed8;">LK</span>
+            <div class="title">Formular ausf&uuml;llen</div>
+            <div class="sub">passendes Teilformular je Anlass &middot; absenden</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:400px;width:300px;height:70px;background:#f3f4f6;border:2px solid #6b7280;">
+            <span class="tag" style="border:1px solid #6b7280;color:#374151;">System</span>
+            <div class="title">Antrag gestellt</div>
+            <div class="sub">Status: gestellt &middot; Log &bdquo;erstellt&ldquo;</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:510px;width:300px;height:70px;background:#fef3c7;border:2px solid #d97706;">
+            <span class="tag" style="border:1px solid #d97706;color:#92400e;">AL</span>
+            <div class="title">Abteilungsleiter pr&uuml;ft</div>
+            <div class="sub">zust&auml;ndig: gleiche Abteilung</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:620px;width:300px;height:80px;background:#fef3c7;border:2px solid #d97706;">
+            <span class="tag" style="border:1px solid #d97706;color:#92400e;">AL</span>
+            <div class="title">Doppelte Best&auml;tigung</div>
+            <div class="sub">Pop-up &middot; 2&times; best&auml;tigen</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:740px;width:300px;height:70px;background:#f3f4f6;border:2px solid #6b7280;">
+            <span class="tag" style="border:1px solid #6b7280;color:#374151;">System</span>
+            <div class="title">Abgezeichnet (AL)</div>
+            <div class="sub">Status: al_abgezeichnet &middot; Log</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:850px;width:300px;height:70px;background:#ede9fe;border:2px solid #7c3aed;">
+            <span class="tag" style="border:1px solid #7c3aed;color:#5b21b6;">StSL</span>
+            <div class="title">Stellv. Schulleiter pr&uuml;ft</div>
+            <div class="sub">schulweit</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:960px;width:300px;height:80px;background:#ede9fe;border:2px solid #7c3aed;">
+            <span class="tag" style="border:1px solid #7c3aed;color:#5b21b6;">StSL</span>
+            <div class="title">Doppelte Best&auml;tigung</div>
+            <div class="sub">Pop-up &middot; 2&times; best&auml;tigen</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:1080px;width:300px;height:70px;background:#f3f4f6;border:2px solid #6b7280;">
+            <span class="tag" style="border:1px solid #6b7280;color:#374151;">System</span>
+            <div class="title">Abgezeichnet (StSL)</div>
+            <div class="sub">Status: stsl_abgezeichnet &middot; Log</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:1190px;width:300px;height:70px;background:#ccfbf1;border:2px solid #0d9488;">
+            <span class="tag" style="border:1px solid #0d9488;color:#115e59;">SL</span>
+            <div class="title">Schulleiter pr&uuml;ft</div>
+            <div class="sub">letzte Instanz</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:1300px;width:300px;height:80px;background:#ccfbf1;border:2px solid #0d9488;">
+            <span class="tag" style="border:1px solid #0d9488;color:#115e59;">SL</span>
+            <div class="title">Doppelte Best&auml;tigung</div>
+            <div class="sub">Pop-up &middot; 2&times; best&auml;tigen</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:350px;top:1420px;width:300px;height:80px;background:#d1fae5;border:3px solid #059669;">
+            <div class="title" style="color:#065f46;">&#10003; Genehmigt</div>
+            <div class="sub">Status: genehmigt &middot; Log-Eintrag</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:720px;top:400px;width:240px;height:110px;background:#fff;border:2px dashed #8a94a3;">
+            <div class="title" style="font-size:12px;color:#374151;">&bdquo;Meine Antr&auml;ge&ldquo;</div>
+            <div class="sub">Antragsteller sieht Stand jederzeit: Fortschrittsbalken + vollst&auml;ndiges Protokoll</div>
+          </div>
+
+          <div class="box" style="z-index:2;left:720px;top:800px;width:240px;height:200px;background:#fee2e2;border:2px solid #c0392b;">
+            <div class="title" style="color:#7f1d1d;">Abgelehnt</div>
+            <div class="sub">Auf jeder Stufe m&ouml;glich (AL / StSL / SL) &rarr; Status: abgelehnt &middot; Log-Eintrag mit Kommentar</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="anwendung">
+    <div class="eyebrow-row"><span class="num">02</span> System</div>
+    <h2>Anwendungsdiagramm</h2>
+    <p class="section-desc">UML-Anwendungsfalldiagramm: welche der vier Rollen welche Systemfunktionen nutzt. Gestrichelte Pfeile zeigen &laquo;include&raquo;-Beziehungen &ndash; z.&thinsp;B. enth&auml;lt &bdquo;Antrag stellen&ldquo; immer die Schritte &bdquo;Anlass ausw&auml;hlen&ldquo; und &bdquo;Formular ausf&uuml;llen&ldquo;.</p>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">Use-Case</span><span class="desc">Lehrkraft &middot; Abteilungsleiter &middot; Stellv. Schulleiter &middot; Schulleiter</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner mock" data-w="1300" data-h="800" style="position:relative;width:1300px;height:800px;background:#fff;">
+
+          <div style="position:absolute;top:8px;left:0;width:1300px;text-align:center;font-size:24px;font-weight:800;color:#1d4e89;">Anwendungsdiagramm (Use-Case)</div>
+
+          <div style="position:absolute;left:230px;top:40px;width:850px;height:680px;border:2px solid #243447;border-radius:8px;"></div>
+          <div style="position:absolute;left:230px;top:48px;width:850px;text-align:center;font-size:13px;font-weight:700;color:#243447;">Antragsprogramm &ndash; Unterrichtsorganisation</div>
+
+          <svg width="1300" height="800" style="position:absolute;top:0;left:0;z-index:1;">
+            <defs>
+              <marker id="incArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,3 L0,6" fill="none" stroke="#1d4e89" stroke-width="1.5"/>
+              </marker>
+            </defs>
+
+            <line x1="76" y1="300" x2="535" y2="110" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="76" y1="300" x2="285" y2="210" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="76" y1="300" x2="280" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="76" y1="300" x2="365" y2="655" stroke="#b8c1cf" stroke-width="1.5"/>
+
+            <line x1="1215" y1="210" x2="755" y2="110" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="210" x2="1005" y2="210" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="210" x2="1000" y2="295" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="210" x2="995" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="210" x2="635" y2="655" stroke="#b8c1cf" stroke-width="1.5"/>
+
+            <line x1="1215" y1="420" x2="755" y2="115" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="420" x2="1005" y2="215" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="420" x2="1000" y2="300" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="420" x2="995" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="420" x2="635" y2="660" stroke="#b8c1cf" stroke-width="1.5"/>
+
+            <line x1="1215" y1="600" x2="755" y2="120" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="600" x2="1005" y2="220" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="600" x2="1000" y2="375" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="600" x2="995" y2="465" stroke="#b8c1cf" stroke-width="1.5"/>
+            <line x1="1215" y1="600" x2="635" y2="665" stroke="#b8c1cf" stroke-width="1.5"/>
+
+            <line x1="380" y1="237" x2="380" y2="268" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#incArrow)"/>
+            <text x="392" y="257" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+
+            <line x1="380" y1="320" x2="380" y2="348" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#incArrow)"/>
+            <text x="392" y="338" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+
+            <path d="M930,320 Q970,420 920,536" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" fill="none" marker-end="url(#incArrow)"/>
+            <text x="945" y="430" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+
+            <line x1="900" y1="400" x2="900" y2="536" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#incArrow)"/>
+            <text x="908" y="470" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+          </svg>
+
+          <div style="position:absolute;left:30px;top:260px;z-index:2;">
+            <svg width="46" height="80"><circle cx="23" cy="12" r="10" fill="#fff" stroke="#243447" stroke-width="2"/><line x1="23" y1="22" x2="23" y2="50" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="5" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="41" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="8" y2="75" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="38" y2="75" stroke="#243447" stroke-width="2"/></svg>
+          </div>
+          <div class="actorlbl" style="left:0px;top:342px;width:106px;">Lehrkraft</div>
+
+          <div style="position:absolute;left:1215px;top:170px;z-index:2;">
+            <svg width="46" height="80"><circle cx="23" cy="12" r="10" fill="#fff" stroke="#243447" stroke-width="2"/><line x1="23" y1="22" x2="23" y2="50" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="5" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="41" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="8" y2="75" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="38" y2="75" stroke="#243447" stroke-width="2"/></svg>
+          </div>
+          <div class="actorlbl" style="left:1170px;top:252px;width:136px;">Abteilungsleiter</div>
+
+          <div style="position:absolute;left:1215px;top:380px;z-index:2;">
+            <svg width="46" height="80"><circle cx="23" cy="12" r="10" fill="#fff" stroke="#243447" stroke-width="2"/><line x1="23" y1="22" x2="23" y2="50" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="5" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="41" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="8" y2="75" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="38" y2="75" stroke="#243447" stroke-width="2"/></svg>
+          </div>
+          <div class="actorlbl" style="left:1160px;top:462px;width:156px;">Stellv. Schulleiter</div>
+
+          <div style="position:absolute;left:1215px;top:560px;z-index:2;">
+            <svg width="46" height="80"><circle cx="23" cy="12" r="10" fill="#fff" stroke="#243447" stroke-width="2"/><line x1="23" y1="22" x2="23" y2="50" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="5" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="30" x2="41" y2="45" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="8" y2="75" stroke="#243447" stroke-width="2"/><line x1="23" y1="50" x2="38" y2="75" stroke="#243447" stroke-width="2"/></svg>
+          </div>
+          <div class="actorlbl" style="left:1170px;top:642px;width:136px;">Schulleiter</div>
+
+          <div class="uc" style="left:535px;top:80px;width:220px;height:60px;background:#f9fafb;border:2px solid #6b7280;z-index:2;">Anmelden / Abmelden</div>
+
+          <div class="uc" style="left:285px;top:182px;width:190px;height:55px;background:#eff6ff;border:2px solid #2563eb;z-index:2;">Antrag stellen</div>
+          <div class="uc" style="left:285px;top:270px;width:190px;height:50px;background:#eff6ff;border:2px solid #2563eb;z-index:2;font-weight:500;">Anlass ausw&auml;hlen</div>
+          <div class="uc" style="left:280px;top:350px;width:200px;height:50px;background:#eff6ff;border:2px solid #2563eb;z-index:2;font-weight:500;">Passendes Formular ausf&uuml;llen</div>
+          <div class="uc" style="left:280px;top:432px;width:200px;height:55px;background:#eff6ff;border:2px solid #2563eb;z-index:2;">Meine Antr&auml;ge &amp; Status einsehen</div>
+
+          <div class="uc" style="left:795px;top:182px;width:210px;height:55px;background:#f5f3ff;border:2px solid #7c3aed;z-index:2;">Antr&auml;ge zur Bearbeitung einsehen</div>
+          <div class="uc" style="left:800px;top:270px;width:200px;height:50px;background:#f5f3ff;border:2px solid #7c3aed;z-index:2;">Antrag abzeichnen<br><span style="font-weight:400;font-size:10px;">(AL, StSL)</span></div>
+          <div class="uc" style="left:800px;top:350px;width:200px;height:50px;background:#f0fdfa;border:2px solid #0d9488;z-index:2;">Antrag genehmigen<br><span style="font-weight:400;font-size:10px;">(nur SL)</span></div>
+          <div class="uc" style="left:805px;top:435px;width:190px;height:50px;background:#f5f3ff;border:2px solid #7c3aed;z-index:2;">Antrag ablehnen</div>
+
+          <div class="uc" style="left:775px;top:537px;width:250px;height:55px;background:#f9fafb;border:2px solid #6b7280;z-index:2;font-size:11px;">Doppelte Best&auml;tigung<br>(Sicherheitsabfrage)</div>
+          <div class="uc" style="left:365px;top:627px;width:270px;height:55px;background:#f9fafb;border:2px solid #6b7280;z-index:2;">Antrag-Details &amp; Verlauf einsehen</div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wireframes">
+    <div class="eyebrow-row"><span class="num">03</span> Oberfl&auml;che</div>
+    <h2>Wireframes</h2>
+    <p class="section-desc">Grundger&uuml;st der sechs zentralen Bildschirme entlang des Nutzerpfads &ndash; bewusst als reines Low-Fi-Skelett gehalten (Graustufen, Symbole statt Farbcodierung), so wie es vor der eigentlichen visuellen Gestaltung stehen sollte.</p>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">login.php</span><span class="desc">Anmeldung &ndash; noch nicht eingeloggt</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="600" style="position:relative;width:1000px;height:600px;background:#fff;">
+
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#8a8a8a;font-style:italic;">Nicht angemeldet</div>
+          </div>
+
+          <div style="border:2px solid #9a9a9a;border-radius:4px;padding:22px 26px;max-width:360px;margin:64px auto 0;">
+            <h2 class="hand" style="margin:0 0 14px;font-size:20px;border-bottom:2px solid #9a9a9a;padding-bottom:10px;">Anmeldung</h2>
+
+            <div class="lbl">Benutzername</div>
+            <div class="fld">mueller</div>
+
+            <div class="lbl" style="margin-top:16px;">Passwort</div>
+            <div class="fld" style="letter-spacing:3px;">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+
+            <div class="hand" style="display:inline-block;border:2px solid #2b2b2b;border-radius:3px;padding:8px 22px;font-size:15px;font-weight:700;margin-top:18px;">Anmelden</div>
+
+            <p style="font-size:11px;color:#8a8a8a;margin-top:18px;border-top:1px dashed #c0c0c0;padding-top:10px;">Noch keine Benutzer? Zuerst <u>setup.php</u> ausf&uuml;hren.<br>Demo-Passwort: test1234</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">index.php</span><span class="desc">Dashboard &ndash; Rolle: Lehrkraft</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="640" style="position:relative;width:1000px;height:640px;background:#fff;">
+
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#555;">Frau M&uuml;ller &mdash; Lehrkraft &nbsp;|&nbsp; <u>Abmelden</u></div>
+          </div>
+          <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+            <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">&Uuml;bersicht</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Neuer Antrag</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Meine Antr&auml;ge</div>
+          </div>
+
+          <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+            <div class="card">
+              <h2 class="hand" style="margin:0 0 10px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Meine &Uuml;bersicht</h2>
+              <p style="font-size:14px;margin:6px 0;">Angemeldet als <strong>Frau M&uuml;ller</strong> (Lehrkraft).</p>
+              <p style="font-size:14px;margin:6px 0;">Du hast bisher <strong>4</strong> Antr&auml;ge gestellt, davon <strong>2</strong> genehmigt.</p>
+              <span class="btn hand">+ Neuen Antrag stellen</span>
+              <span class="btn hand">Meine Antr&auml;ge &amp; Status</span>
+            </div>
+
+            <div class="card">
+              <h2 class="hand" style="margin:0 0 10px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Ablauf des Genehmigungsprozesses</h2>
+              <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;">
+                <div style="flex:1;min-width:100px;text-align:center;padding:10px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 1. Lehrkraft stellt Antrag</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:10px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 2. Abteilungsleiter zeichnet ab</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:10px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 3. Stellv. Schulleiter zeichnet ab</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:10px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 4. Schulleiter genehmigt</div>
+              </div>
+              <p style="font-size:11px;color:#8a8a8a;margin-top:6px;">Jeder Schritt wird protokolliert. Der Antragsteller sieht den aktuellen Stand jederzeit unter &bdquo;Meine Antr&auml;ge&ldquo;.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">neuer_antrag.php</span><span class="desc">Antrag stellen &ndash; Teilformular &bdquo;Unterrichtsvertretung&ldquo; aktiv</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="840" style="position:relative;width:1000px;height:840px;background:#fff;">
+
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#555;">Frau M&uuml;ller &mdash; Lehrkraft &nbsp;|&nbsp; <u>Abmelden</u></div>
+          </div>
+          <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">Neuer Antrag</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Meine Antr&auml;ge</div>
+          </div>
+
+          <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+            <div style="border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;">
+              <h2 class="hand" style="margin:0 0 10px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Neuer Antrag</h2>
+
+              <div class="grid2">
+                <div><div class="lbl">Antragsteller</div><div class="fld" style="background:#f3f3f3;">Frau M&uuml;ller</div></div>
+                <div><div class="lbl">Datum</div><div class="fld" style="background:#f3f3f3;">14.09.2026</div></div>
+              </div>
+
+              <div class="lbl">Anlass w&auml;hlen (Punkt 1)</div>
+              <div style="display:flex;flex-direction:column;gap:6px;margin:6px 0;">
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border:2px solid #2b2b2b;border-radius:4px;font-size:14px;">
+                  <span style="width:15px;height:15px;border:2px solid #2b2b2b;border-radius:50%;display:inline-block;position:relative;"><span style="position:absolute;inset:2px;background:#2b2b2b;border-radius:50%;"></span></span>
+                  Unterrichtsvertretung
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid #c0c0c0;border-radius:4px;font-size:14px;color:#8a8a8a;">
+                  <span style="width:15px;height:15px;border:2px solid #b0b0b0;border-radius:50%;display:inline-block;"></span>
+                  Unterrichtstausch
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid #c0c0c0;border-radius:4px;font-size:14px;color:#8a8a8a;">
+                  <span style="width:15px;height:15px;border:2px solid #b0b0b0;border-radius:50%;display:inline-block;"></span>
+                  Klasse abwesend
+                </div>
+              </div>
+
+              <div style="border-top:1px dashed #c0c0c0;margin-top:14px;padding-top:10px;">
+                <div class="lbl">Grund</div>
+                <div class="fld">Fortbildung</div>
+                <div class="grid2">
+                  <div><div class="lbl">Beginn</div><div class="fld">16.09.2026</div></div>
+                  <div><div class="lbl">Ende</div><div class="fld">16.09.2026</div></div>
+                </div>
+                <div class="lbl">Vertretungsmaterial</div>
+                <div class="fld" style="display:flex;justify-content:space-between;">auf Lernplattform <span>&#9662;</span></div>
+              </div>
+
+              <br>
+              <span class="btn hand">Antrag absenden</span>
+              <span class="btn hand" style="color:#8a8a8a;border-color:#b0b0b0;">Abbrechen</span>
+            </div>
+
+            <div style="margin-top:14px;padding:10px 14px;border:2px dashed #9a9a9a;border-radius:4px;font-size:12px;color:#555;">
+              Hinweis (Prototyp): Je nach gew&auml;hltem Anlass erscheint automatisch das passende Teilformular &ndash; hier f&uuml;r &bdquo;Unterrichtsvertretung&ldquo;. Bei Auswahl von &bdquo;Tausch&ldquo; oder &bdquo;Klasse abwesend&ldquo; werden stattdessen deren Felder eingeblendet.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">meine_antraege.php</span><span class="desc">Eigene Antr&auml;ge &amp; Bearbeitungsstand</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="560" style="position:relative;width:1000px;height:560px;background:#fff;">
+
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#555;">Frau M&uuml;ller &mdash; Lehrkraft &nbsp;|&nbsp; <u>Abmelden</u></div>
+          </div>
+          <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Neuer Antrag</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">Meine Antr&auml;ge</div>
+          </div>
+
+          <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+            <div style="border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;">
+              <h2 class="hand" style="margin:0 0 6px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Meine Antr&auml;ge &amp; Bearbeitungsstand</h2>
+              <table>
+                <tr><th>Nr.</th><th>Anlass</th><th>Eingereicht</th><th>Status</th><th></th></tr>
+                <tr><td>2026-0008</td><td>Unterrichtsvertretung</td><td>13.09.2026 16:47</td><td><span class="pill">&#9675; gestellt</span></td><td><u>Verlauf</u></td></tr>
+                <tr><td>2026-0007</td><td>Klasse abwesend</td><td>12.09.2026 08:05</td><td><span class="pill">&#9680; al abgezeichnet</span></td><td><u>Verlauf</u></td></tr>
+                <tr><td>2026-0006</td><td>Unterrichtstausch</td><td>11.09.2026 14:30</td><td><span class="pill">&#9681; stsl abgezeichnet</span></td><td><u>Verlauf</u></td></tr>
+                <tr><td>2026-0005</td><td>Unterrichtsvertretung</td><td>10.09.2026 09:12</td><td><span class="pill" style="font-weight:700;">&#10003; genehmigt</span></td><td><u>Verlauf</u></td></tr>
+                <tr><td>2026-0004</td><td>Unterrichtstausch</td><td>02.09.2026 11:00</td><td><span class="pill" style="border-style:dashed;">&#10005; abgelehnt</span></td><td><u>Verlauf</u></td></tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">bearbeitung.php</span><span class="desc">Rolle: Abteilungsleiter &ndash; doppelte Best&auml;tigung (Schritt 2) offen</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="700" style="position:relative;width:1000px;height:700px;background:#fff;">
+
+          <div style="filter:blur(1px);">
+            <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+              <div style="font-size:13px;color:#555;">Frau Kraus &mdash; Abteilungsleiter &nbsp;|&nbsp; <u>Abmelden</u></div>
+            </div>
+            <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+              <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
+              <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">Zu bearbeiten</div>
+            </div>
+
+            <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+              <div style="border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;">
+                <h2 class="hand" style="margin:0 0 6px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Antr&auml;ge zur Bearbeitung (meine Abteilung)</h2>
+                <p style="font-size:11px;color:#8a8a8a;margin-top:6px;">Als Abteilungsleiter bearbeitest du Antr&auml;ge im Status &bdquo;gestellt&ldquo;.</p>
+                <table>
+                  <tr><th>Nr.</th><th>Antragsteller</th><th>Anlass</th><th>Eingereicht</th><th>Aktion</th></tr>
+                  <tr><td>2026-0009</td><td>Herr Schmidt</td><td>Unterrichtsvertretung</td><td>14.09.2026 07:50</td>
+                    <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
+                  <tr><td>2026-0010</td><td>Frau Berg</td><td>Klasse abwesend</td><td>14.09.2026 09:15</td>
+                    <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:absolute;inset:0;background:rgba(40,40,40,.45);display:flex;align-items:center;justify-content:center;">
+            <div style="background:#fff;border:2px solid #2b2b2b;border-radius:4px;padding:24px 28px;max-width:380px;text-align:center;">
+              <h3 class="hand" style="margin:0 0 10px;font-size:19px;">Abzeichnen</h3>
+              <p style="font-size:13px;"><strong>Sicherheitsabfrage:</strong> Bitte erneut best&auml;tigen. Diese Aktion erzeugt einen Log-Eintrag.</p>
+              <p style="font-size:11px;color:#8a8a8a;">(Schritt 2 von 2 &ndash; erste Best&auml;tigung bereits erfolgt f&uuml;r Antrag 2026-0009)</p>
+              <span class="sbtn" style="padding:8px 18px;font-size:14px;">Endg&uuml;ltig best&auml;tigen</span>
+              <span class="sbtn" style="padding:8px 18px;font-size:14px;color:#8a8a8a;border-color:#b0b0b0;">Abbrechen</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-cap"><span class="name">antrag.php</span><span class="desc">Detailansicht &amp; Verlauf/Protokoll</span></div>
+      <div class="frame-outer">
+        <div class="frame-inner wf" data-w="1000" data-h="760" style="position:relative;width:1000px;height:760px;background:#fff;">
+
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#555;">Frau M&uuml;ller &mdash; Lehrkraft &nbsp;|&nbsp; <u>Abmelden</u></div>
+          </div>
+          <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Neuer Antrag</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">Meine Antr&auml;ge</div>
+          </div>
+
+          <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+            <div class="card">
+              <h2 class="hand" style="margin:0 0 10px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Antrag 2026-0007 &ndash; Details</h2>
+              <dl class="detail">
+                <dt>Antragsteller</dt><dd>Herr Schmidt</dd>
+                <dt>Abteilung</dt><dd>Elektrotechnik</dd>
+                <dt>Anlass</dt><dd>Klasse abwesend</dd>
+                <dt>Klasse</dt><dd>EL12b</dd>
+                <dt>Grund</dt><dd>Betriebspraktikum</dd>
+                <dt>Beginn / Ende</dt><dd>15.09.2026 &ndash; 19.09.2026</dd>
+                <dt>Status</dt><dd><span class="pill">&#9680; al abgezeichnet</span></dd>
+              </dl>
+
+              <div style="display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;">
+                <div style="flex:1;min-width:100px;text-align:center;padding:9px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 1. gestellt</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:9px 6px;border:2px solid #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#10003; 2. AL abgezeichnet</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:9px 6px;border:2px dashed #2b2b2b;border-radius:4px;font-size:12px;font-weight:600;">&#9679; 3. StSL (aktuell)</div>
+                <div style="flex:1;min-width:100px;text-align:center;padding:9px 6px;border:1px solid #c0c0c0;border-radius:4px;font-size:12px;color:#b0b0b0;">&#9675; 4. SL genehmigt</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2 class="hand" style="margin:0 0 10px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Verlauf / Protokoll</h2>
+              <table>
+                <tr><th>Aktion</th><th>Benutzer</th><th>Zeitpunkt</th><th>Kommentar</th></tr>
+                <tr><td>&#10003; erstellt</td><td>Herr Schmidt</td><td>12.09.2026 08:05</td><td>Antrag eingereicht</td></tr>
+                <tr><td>&#10003; al_abgezeichnet</td><td>Frau Kraus (AL)</td><td>12.09.2026 10:22</td><td>&ndash;</td></tr>
+                <tr style="color:#b0b0b0;"><td>&#9675; stsl_abgezeichnet</td><td>ausstehend</td><td>&ndash;</td><td>&ndash;</td></tr>
+                <tr style="color:#b0b0b0;"><td>&#9675; genehmigt</td><td>ausstehend</td><td>&ndash;</td><td>&ndash;</td></tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>Prototyp / Wireframe &ndash; keine Endgestaltung. Basis: bestehender PHP/MySQL-Stand aus README.md &amp; assets/style.css.</footer>
+</div>
+
+<script>
+  function fitFrames(){
+    document.querySelectorAll('.frame-outer').forEach(function(outer){
+      var inner = outer.querySelector('.frame-inner');
+      if(!inner) return;
+      var nativeW = parseFloat(inner.getAttribute('data-w'));
+      var nativeH = parseFloat(inner.getAttribute('data-h'));
+      var scale = Math.min(1, outer.clientWidth / nativeW);
+      inner.style.transform = 'scale(' + scale + ')';
+      outer.style.height = Math.round(nativeH * scale) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitFrames);
+  document.addEventListener('DOMContentLoaded', fitFrames);
+  window.addEventListener('load', fitFrames);
+  fitFrames();
+</script>

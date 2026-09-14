@@ -1,0 +1,12 @@
+# Betriebssystem
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Lokale Zugangsdaten (nicht einchecken)
+config.php
+**/config.php
