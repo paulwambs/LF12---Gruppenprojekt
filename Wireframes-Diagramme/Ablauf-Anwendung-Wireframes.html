@@ -286,30 +286,38 @@
               <marker id="incArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
                 <path d="M0,0 L8,3 L0,6" fill="none" stroke="#1d4e89" stroke-width="1.5"/>
               </marker>
+              <marker id="genArrow" markerWidth="16" markerHeight="14" refX="14" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M1,1 L14,7 L1,13 Z" fill="#fff" stroke="#243447" stroke-width="1.5"/>
+              </marker>
+              <marker id="extArrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#141a24"/>
+              </marker>
             </defs>
 
-            <line x1="76" y1="300" x2="535" y2="110" stroke="#b8c1cf" stroke-width="1.5"/>
+            <!-- Assoziationen Lehrkraft (Login wird per include ueber "Antrag stellen" erreicht) -->
             <line x1="76" y1="300" x2="285" y2="210" stroke="#b8c1cf" stroke-width="1.5"/>
             <line x1="76" y1="300" x2="280" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="76" y1="300" x2="365" y2="655" stroke="#b8c1cf" stroke-width="1.5"/>
 
-            <line x1="1215" y1="210" x2="755" y2="110" stroke="#b8c1cf" stroke-width="1.5"/>
+            <!-- Assoziationen Abteilungsleiter (Basis-Rolle: traegt die gemeinsamen Rechte; Login per include ueber "Antraege zur Bearbeitung einsehen") -->
             <line x1="1215" y1="210" x2="1005" y2="210" stroke="#b8c1cf" stroke-width="1.5"/>
             <line x1="1215" y1="210" x2="1000" y2="295" stroke="#b8c1cf" stroke-width="1.5"/>
             <line x1="1215" y1="210" x2="995" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
             <line x1="1215" y1="210" x2="635" y2="655" stroke="#b8c1cf" stroke-width="1.5"/>
 
-            <line x1="1215" y1="420" x2="755" y2="115" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="420" x2="1005" y2="215" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="420" x2="1000" y2="300" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="420" x2="995" y2="460" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="420" x2="635" y2="660" stroke="#b8c1cf" stroke-width="1.5"/>
-
-            <line x1="1215" y1="600" x2="755" y2="120" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="600" x2="1005" y2="220" stroke="#b8c1cf" stroke-width="1.5"/>
+            <!-- Schulleiter: einzige eigene Assoziation (Sonderrecht) -->
             <line x1="1215" y1="600" x2="1000" y2="375" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="600" x2="995" y2="465" stroke="#b8c1cf" stroke-width="1.5"/>
-            <line x1="1215" y1="600" x2="635" y2="665" stroke="#b8c1cf" stroke-width="1.5"/>
+
+            <!-- Aktor-Generalisierung (Rechtevererbung): Schulleiter -> Stellv. Schulleiter -> Abteilungsleiter -->
+            <line x1="1238" y1="552" x2="1238" y2="484" stroke="#243447" stroke-width="1.8" marker-end="url(#genArrow)"/>
+            <line x1="1238" y1="372" x2="1238" y2="274" stroke="#243447" stroke-width="1.8" marker-end="url(#genArrow)"/>
+
+            <!-- include-Beziehungen -->
+            <!-- Antrag stellen / Antraege zur Bearbeitung einsehen schliessen Anmelden/Abmelden (Login) ein -->
+            <path d="M405,182 L578,138" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" fill="none" marker-end="url(#incArrow)"/>
+            <text x="410" y="152" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+
+            <path d="M878,182 L712,138" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" fill="none" marker-end="url(#incArrow)"/>
+            <text x="770" y="152" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
 
             <line x1="380" y1="237" x2="380" y2="268" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#incArrow)"/>
             <text x="392" y="257" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
@@ -322,6 +330,10 @@
 
             <line x1="900" y1="400" x2="900" y2="536" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#incArrow)"/>
             <text x="908" y="470" font-size="10" font-style="italic" fill="#1d4e89">&laquo;include&raquo;</text>
+
+            <!-- Extend-Beziehung: Meine Antraege & Status einsehen erweitert Antrag-Details & Verlauf einsehen -->
+            <path d="M395,487 L495,624" stroke="#141a24" stroke-width="3" fill="none" marker-end="url(#extArrow)"/>
+            <text x="405" y="560" font-size="12" font-weight="700" fill="#141a24">&laquo;Extend&raquo;</text>
           </svg>
 
           <div style="position:absolute;left:30px;top:260px;z-index:2;">
@@ -536,42 +548,30 @@
     </div>
 
     <div class="sheet">
-      <div class="sheet-cap"><span class="name">bearbeitung.php</span><span class="desc">Rolle: Abteilungsleiter &ndash; doppelte Best&auml;tigung (Schritt 2) offen</span></div>
+      <div class="sheet-cap"><span class="name">bearbeitung.php</span><span class="desc">Rolle: Abteilungsleiter &ndash; Antr&auml;ge zur Bearbeitung</span></div>
       <div class="frame-outer">
         <div class="frame-inner wf" data-w="1000" data-h="700" style="position:relative;width:1000px;height:700px;background:#fff;">
 
-          <div style="filter:blur(1px);">
-            <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
-              <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
-              <div style="font-size:13px;color:#555;">Frau Kraus &mdash; Abteilungsleiter &nbsp;|&nbsp; <u>Abmelden</u></div>
-            </div>
-            <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
-              <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
-              <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">Zu bearbeiten</div>
-            </div>
-
-            <div style="max-width:860px;margin:22px auto;padding:0 16px;">
-              <div style="border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;">
-                <h2 class="hand" style="margin:0 0 6px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Antr&auml;ge zur Bearbeitung (meine Abteilung)</h2>
-                <p style="font-size:11px;color:#8a8a8a;margin-top:6px;">Als Abteilungsleiter bearbeitest du Antr&auml;ge im Status &bdquo;gestellt&ldquo;.</p>
-                <table>
-                  <tr><th>Nr.</th><th>Antragsteller</th><th>Anlass</th><th>Eingereicht</th><th>Aktion</th></tr>
-                  <tr><td>2026-0009</td><td>Herr Schmidt</td><td>Unterrichtsvertretung</td><td>14.09.2026 07:50</td>
-                    <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
-                  <tr><td>2026-0010</td><td>Frau Berg</td><td>Klasse abwesend</td><td>14.09.2026 09:15</td>
-                    <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
-                </table>
-              </div>
-            </div>
+          <div style="background:#f3f3f3;border-bottom:2px solid #9a9a9a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+            <div class="hand" style="font-size:19px;font-weight:700;">Unterrichtsorganisation &ndash; Antragssystem</div>
+            <div style="font-size:13px;color:#555;">Frau Kraus &mdash; Abteilungsleiter &nbsp;|&nbsp; <u>Abmelden</u></div>
+          </div>
+          <div style="background:#eee;border-bottom:2px solid #9a9a9a;padding:0 24px;display:flex;gap:22px;">
+            <div class="hand" style="padding:11px 0;font-size:15px;color:#777;">&Uuml;bersicht</div>
+            <div class="hand" style="padding:11px 0;font-size:15px;font-weight:700;border-bottom:3px solid #2b2b2b;">Zu bearbeiten</div>
           </div>
 
-          <div style="position:absolute;inset:0;background:rgba(40,40,40,.45);display:flex;align-items:center;justify-content:center;">
-            <div style="background:#fff;border:2px solid #2b2b2b;border-radius:4px;padding:24px 28px;max-width:380px;text-align:center;">
-              <h3 class="hand" style="margin:0 0 10px;font-size:19px;">Abzeichnen</h3>
-              <p style="font-size:13px;"><strong>Sicherheitsabfrage:</strong> Bitte erneut best&auml;tigen. Diese Aktion erzeugt einen Log-Eintrag.</p>
-              <p style="font-size:11px;color:#8a8a8a;">(Schritt 2 von 2 &ndash; erste Best&auml;tigung bereits erfolgt f&uuml;r Antrag 2026-0009)</p>
-              <span class="sbtn" style="padding:8px 18px;font-size:14px;">Endg&uuml;ltig best&auml;tigen</span>
-              <span class="sbtn" style="padding:8px 18px;font-size:14px;color:#8a8a8a;border-color:#b0b0b0;">Abbrechen</span>
+          <div style="max-width:860px;margin:22px auto;padding:0 16px;">
+            <div style="border:2px solid #9a9a9a;border-radius:4px;padding:18px 22px;">
+              <h2 class="hand" style="margin:0 0 6px;font-size:18px;border-bottom:2px solid #9a9a9a;padding-bottom:8px;">Antr&auml;ge zur Bearbeitung (meine Abteilung)</h2>
+              <p style="font-size:11px;color:#8a8a8a;margin-top:6px;">Als Abteilungsleiter bearbeitest du Antr&auml;ge im Status &bdquo;gestellt&ldquo;.</p>
+              <table>
+                <tr><th>Nr.</th><th>Antragsteller</th><th>Anlass</th><th>Eingereicht</th><th>Aktion</th></tr>
+                <tr><td>2026-0009</td><td>Herr Schmidt</td><td>Unterrichtsvertretung</td><td>14.09.2026 07:50</td>
+                  <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
+                <tr><td>2026-0010</td><td>Frau Berg</td><td>Klasse abwesend</td><td>14.09.2026 09:15</td>
+                  <td style="white-space:nowrap;"><span class="sbtn">Details</span><span class="sbtn">&#10003; Abzeichnen</span><span class="sbtn">&#10005; Ablehnen</span></td></tr>
+              </table>
             </div>
           </div>
 
